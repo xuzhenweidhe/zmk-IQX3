@@ -16,6 +16,6 @@ include:
   # ipadk
   - board: nice_nano_v2
     shield: iqx3
-    artifact-name: ipadk
+    artifact-name: iqx3
   - board: nice_nano_v2
     shield: settings_reset
