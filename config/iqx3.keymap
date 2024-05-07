@@ -70,28 +70,28 @@
 
         Ble {
             bindings = <
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                  &trans  &trans  &trans  &trans  &trans  &trans
+  &bt BT_CLR  &bt BT_CLR_ALL  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+  &trans      &trans          &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+  &trans      &trans          &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                              &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
         Arrows {
             bindings = <
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                  &trans  &trans  &trans  &trans  &trans  &trans
+  &trans  &trans  &kp LEFT  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                  &trans    &trans  &trans  &trans  &trans  &trans
             >;
         };
 
         Ctrls {
             bindings = <
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                  &trans  &trans  &trans  &trans  &trans  &trans
+  &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+  &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+  &kp LC(Z)  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                     &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
