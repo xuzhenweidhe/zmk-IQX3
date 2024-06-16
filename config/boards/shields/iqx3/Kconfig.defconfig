@@ -4,6 +4,6 @@
 if SHIELD_iqx3
 
 config ZMK_KEYBOARD_NAME
-	default "X.Tips Keyboard"
+	default "IQX3"
 
 endif
