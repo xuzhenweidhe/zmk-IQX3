@@ -13,20 +13,190 @@
 #include <dt-bindings/zmk/mouse.h>
 
 / {
-    keymap0: keymap {
+    behaviors {
+        tab_esc_ctrl: tab_esc_ctrl {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAB_ESC_CTRL";
+            #binding-cells = <0>;
+            bindings = <&mt LCTRL ESC>, <&kp TAB>;
+        };
+
+        gqt: global-quick-tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "GLOBAL_QUICK_TAP";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            quick-tap-ms = <180>;
+            tapping-term-ms = <200>;
+            global-quick-tap;
+            flavor = "tap-preferred";
+        };
+
+        ltq: ltq {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LTQ";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            global-quick-tap;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <180>;
+            flavor = "tap-preferred";
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        left_bkt {
+            bindings = <&kp ESC>;
+            key-positions = <0 1>;
+            timeout-ms = <50>;
+        };
+
+        right_bkt {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <8 9>;
+            timeout-ms = <50>;
+        };
+
+        left_par {
+            bindings = <&kp ENTER>;
+            key-positions = <18 19>;
+            timeout-ms = <50>;
+        };
+
+        right_par {
+            bindings = <&kp PAGE_UP>;
+            key-positions = <6 7>;
+            timeout-ms = <50>;
+        };
+
+        left_brace {
+            bindings = <&kp PG_DN>;
+            key-positions = <16 17>;
+            timeout-ms = <50>;
+        };
+
+        right_brace {
+            bindings = <&kp HOME>;
+            key-positions = <2 3>;
+            timeout-ms = <50>;
+        };
+
+        bac {
+            bindings = <&kp END>;
+            key-positions = <12 13>;
+        };
+
+        pipe {
+            bindings = <&kp LS(N9)>;
+            key-positions = <7 8>;
+        };
+
+        youkouhao {
+            bindings = <&kp LS(N0)>;
+            key-positions = <17 18>;
+        };
+
+        del {
+            bindings = <&kp DELETE>;
+            key-positions = <10 11>;
+        };
+
+        caps {
+            bindings = <&kp CAPSLOCK>;
+            key-positions = <20 21>;
+        };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <28 29>;
+        };
+    };
+
+    macros {
+        KEY: new_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(C) &kp H &kp L &kp DOT &kp N8 &kp N8 &kp N0 &kp N6 &kp N0 &kp N2 &kp EXCL &kp AT &kp POUND &kp DLLR &kp PRCNT &kp ENTER>;
+            label = "NEW_MACRO";
+        };
+    };
+
+    keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        Base {
+            label = "Base";
+            bindings = <
             // | --- |   Q   |   W   |   E   |   R   |   T   |   Y   |   U   |   I   |   O   |   P   |  --- |
             // | --- |   A   |   S   |   D   |   F   |   G   |   H   |   J   |   K   |   L   |  Ent  |  --- |
             // | --- |   Z   |   X   |   C   |   V   |   B   |   N   |   M   | 3,Spc |  Del  |  BS   |  --- |
-            // | --- |  ---  |  ---  | LCtrl | MO(1) | LSht  |  LAlt | MO(2) | LWin  |  ---  |  ---  |  --- | 
+            // | --- |  ---  |  ---  | LCtrl | MO(1) | LSht  |  LAlt | MO(2) | LWin  |  ---  |  ---  |  --- |
 
+&kp Q    &kp W  &kp E           &kp R                  &kp T             &kp Y      &kp U             &kp I         &kp O    &kp P
+&kp A    &kp S  &kp D           &kp F                  &lt 5 G           &lt 5 H    &kp J             &kp K         &kp L    &kp ENTER
+&lt 3 Z  &kp X  &kp C           &kp V                  &kp B             &kp N      &kp M             &kp COMMA     &kp DOT  &mt LEFT_SHIFT SLASH
+                &lt 6 CAPSLOCK  &gqt LCTRL LEFT_SHIFT  &lt 1 LEFT_WIN    &kp SPACE  &ltq 2 BACKSPACE  &lt 4 DELETE
+            >;
+        };
+
+        Number {
+            label = "Number";
             bindings = <
-  &kp Q  &kp W  &kp E   &kp R   &kp T   &kp Y   &kp U   &kp I      &kp O    &kp P
-  &kp A  &kp S  &kp D   &kp F   &kp G   &kp H   &kp J   &kp K      &kp L    &kp ENTER
-  &kp Z  &kp X  &kp C   &kp V   &kp B   &kp N   &kp M   &kp COMMA  &kp DOT  &kp FSLH
-                &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6
+&kp N1     &kp N2      &kp N3          &kp N4        &kp N5             &kp N6     &kp N7        &kp N8      &kp N9    &kp N0
+&kp MINUS  &kp EQUAL   &kp F2          &kp F5        &kp TAB            &kp BSLH   &kp LBKT      &kp RBKT    &kp SEMI  &kp APOS
+&kp GRAVE  &kp C_MUTE  &KEY            &kp C_VOL_DN  &kp C_VOLUME_UP    &none      &kp UP_ARROW  &kp LEFT    &kp DOWN  &kp RIGHT
+                       &kp LEFT_SHIFT  &kp LEFT_ALT  &trans             &kp SPACE  &kp BSPC      &kp DELETE
+            >;
+        };
+
+        Icons {
+label = "Icons";
+            bindings = <
+&kp LS(N1)     &kp LS(N2)     &kp LS(N3)  &kp LS(N4)  &kp LS(N5)    &kp LS(N6)    &kp LS(N7)    &kp LS(N8)     &kp LS(N9)    &kp LS(N0)
+&kp LS(MINUS)  &kp LS(EQUAL)  &trans      &trans      &trans        &kp LS(BSLH)  &kp LS(LBKT)  &kp LS(RBKT)   &kp LS(SEMI)  &kp LS(APOS)
+&kp LS(GRAVE)  &trans         &trans      &trans      &trans        &trans        &trans        &kp LS(COMMA)  &kp LS(DOT)   &kp LS(FSLH)
+                              &trans      &trans      &trans        &kp SPACE     &trans        &trans
+            >;
+        };
+        Lpad {
+label = "Lpad";
+            bindings = <
+&kp LEFT      &kp RIGHT  &kp N7  &kp N8   &kp N9     &kp LS(EQUAL)  &kp MINUS   &kp LS(N8)  &kp FSLH      &kp BSPC
+&kp LEFT_ALT  &kp BSPC   &kp N4  &kp N5   &kp N6     &kp EQUAL      &kp LS(N9)  &kp LS(N0)  &trans        &kp ENTER
+&trans        &kp RET    &kp N1  &kp N2   &kp N3     &trans         &trans      &trans      &kp LEFT_ALT  &kp TAB
+                         &kp N0  &kp DOT  &kp TAB    &trans         &trans      &trans
+            >;
+        };
+        Ble {
+            label = "Ble";
+            bindings = <
+&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &none  &none  &none   &none  &none
+&bootloader   &none         &none         &bt BT_CLR    &out OUT_TOG    &none  &none  &none   &none  &none
+&none         &none         &none         &out OUT_USB  &out OUT_BLE    &none  &none  &none   &none  &none
+                            &none         &none         &none           &none  &none  &trans
+            >;
+        };
+
+        Arrows {
+label = "Arrows";
+            bindings = <
+&trans  &trans    &kp UP    &trans     &trans    &trans     &trans         &kp UP    &trans     &trans
+&trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans    &trans     &kp LEFT       &kp DOWN  &kp RIGHT  &trans
+&trans  &trans    &trans    &trans     &trans    &trans     &trans         &trans    &trans     &trans
+                  &trans    &trans     &trans    &kp SPACE  &kp BACKSPACE  &kp DEL
+            >;
+        };
+        Ctrls {
+label = "Ctrls";
+            bindings = <
+&kp LC(J)            &kp LA(LC(W))  &kp LC(LSHFT)  &kp LC(Y)  &kp LG(TAB)     &trans  &trans     &trans  &trans  &trans
+&mt LA(LC(A)) LC(A)  &kp LC(S)      &kp LG(D)      &kp LC(F)  &kp LG(L)       &trans  &kp LC(J)  &trans  &trans  &trans
+&kp LC(Z)            &kp LC(X)      &kp LC(C)      &kp LC(V)  &kp LC(B)       &trans  &trans     &trans  &trans  &trans
+                                    &kp TAB        &trans     &kp LEFT_ALT    &trans  &trans     &trans
             >;
         };
     };
